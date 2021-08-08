@@ -1,0 +1,11 @@
+
+
+module Top
+{
+	TestExtern e1;
+	TestExtern e2;
+
+	e1.out -> e2.in;
+	e1.in  <- e2.out;
+}
+

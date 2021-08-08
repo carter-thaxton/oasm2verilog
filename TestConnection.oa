@@ -1,0 +1,91 @@
+
+
+module Outer
+{
+	output word Hey;
+	wire bit Wr;
+
+	RF_RAM TestRF
+	{
+		input bit Wr <- Wr;
+		input word WrData -> wr_data0_word, wr_data1_word;
+
+		output word RdData -> Hey;
+
+		Wr -> wr;
+		rd_data0_word -> RdData;
+	}
+
+	TestRF TestRF2;
+
+	module Inner
+	{
+		wire word data <- Outer.TestRF2.RdData;
+		wire word data2 <- TestRF2.RdData;
+
+		ALU TestRF2
+		{
+			output word RdData;
+		}
+
+	}
+	
+	A a;
+}
+
+
+module A
+{
+
+	wire bit t;
+	wire bit u;
+
+	module B
+	{
+		t -> u;
+
+		ALU C
+		{
+			reg bit Q;
+
+			TF
+			{
+				Q = !Q;
+			}
+		}
+	}
+}
+
+
+module Inst
+{
+	input bit t;
+	output bit r;
+}
+
+module Outer2
+{
+	Inst a;
+	Inst b;
+
+	wire bit B;
+
+	module Q
+	{
+		output bit A -> B;
+
+		Inst a;
+		Inst b;
+
+		module Deeper
+		{
+			Outer2.a.t <- b.r;
+			a.t <- b.r;
+		}
+
+		Deeper deeper1;
+	}
+
+	Q q1;
+}
+

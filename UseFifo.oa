@@ -1,0 +1,67 @@
+
+module UseFifo
+{
+	input bit Start;
+	output word Result;
+
+//	RF_FIFO fifo;
+//	fifo.depth = 16;
+
+//	Controller.Wr -> fifo.wr;
+//	Receiver.RdData <- delay(1) <- fifo.rd_data0;
+
+	ALU Controller
+	{
+		output bit reg Wr;
+		input bit Start <- Start;
+
+		tfa
+		{
+			branch Started = Start;
+		}
+
+		inst
+		{
+			WaitForStart:
+			if (Started) Pause else WaitForStart;
+
+			Pause:	Wr = 0;
+			Pause2:	Wr = 0;
+			Pause3:	Wr = 0;
+			Pause4:	Wr = 0;
+			Pause5:	Wr = 0;
+			goto WaitForStart;
+		}
+
+		TF
+		{
+			Wr = Start;
+		}
+	}
+
+	ALU Receiver
+	{
+		input word RdData;
+		output reg word Result -> Result;
+
+		tfa
+		{
+			branch DataReceived = Result[2] || delay(delay(delay(RdData, 2).v, 1), 2);
+		}
+
+		inst
+		{
+			WaitForData:
+			if (DataReceived) HandleData else WaitForData;
+
+			HandleData:
+			// ...
+		}
+	}
+
+	Test test;
+}
+
+ALU Test
+{
+}

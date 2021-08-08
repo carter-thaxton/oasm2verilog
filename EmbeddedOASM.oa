@@ -1,0 +1,55 @@
+
+
+
+other stuff!!!!
+
+other stuff!!!!
+
+
+
+//+++EMBEDDED_OASM+++
+//var CounterTotal = 10;
+//
+//ALU Counter
+//{
+//	out reg bit Pulse;
+//	reg word Count;
+//
+//	const word Limit = CounterTotal-1;
+//
+//	init
+//	{
+//		Pulse = 0;
+//		Count = 0;
+//	}
+//
+//	tfa
+//	{
+//		branch LimitReached = !status;
+//	}
+//
+//	inst
+//	{
+//		Start:
+//		Count, Pulse = 0;		// same as Count = zero();  Pulse = 0;
+//
+//		Compare:
+//		xor(Count, Limit);
+//
+//		:
+//		if (LimitReached) DoPulse;
+//
+//		:
+//		Count = inc(Count);
+//		goto Compare;
+//
+//		DoPulse:
+//		Pulse = 1;
+//		goto Start;
+//	}
+//}
+//
+//+++END_EMBEDDED_OASM+++
+
+other stuff!!!!
+

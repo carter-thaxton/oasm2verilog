@@ -1,0 +1,96 @@
+
+/*
+var list;
+
+list = {-1, -2, -3};
+
+list[4] = 5;
+
+print "\nlist: ";
+print list;
+print "\n";
+
+var list_of_lists = {11, 22, 33, {5, 6, 7}, list};
+print "\nlist of lists: ";
+print list_of_lists;
+print "\n";
+
+print "\nlist_of_lists[3]: ";
+print list_of_lists[3];
+print "\n";
+
+list_of_lists[3] = 66;
+print "\nlist_of_lists[3]: ";
+print list_of_lists[3];
+print "\n";
+
+list_of_lists[2] = list_of_lists;
+print "\nlist_of_lists[2]: ";
+print list_of_lists[2];
+print "\n";
+
+print "\nlist of lists: ";
+print list_of_lists;
+print "\n";
+*/
+
+/*
+print "\n- creating init_values = {1,2,3}\n";
+
+var init_values[] = {1,2,3};
+init_values[1] = {1, 2, 3};
+
+print "\ninit_values[" + length(init_values) + "]: ";
+print init_values;
+print "\n";
+
+print "\n- copying by reference\n";
+
+var init_values2 = init_values;
+
+print "\ninit_values2[" + length(init_values2) + "]: ";
+print init_values2;
+print "\n";
+
+print "\n- setting init_values[2] = 99\n";
+
+init_values[2] = 99;
+
+print "\ninit_values[" + length(init_values) + "]: ";
+print init_values;
+print "\n";
+
+print "\ninit_values2[" + length(init_values2) + "]: ";
+print init_values2;
+print "\n";
+
+print "\n- copying by value\n";
+
+var init_values_copy = copy(init_values);
+
+print "\ninit_values_copy[" + length(init_values_copy) + "]: ";
+print init_values_copy;
+print "\n";
+
+print "\n- setting init_values_copy[2] = 666\n";
+
+init_values_copy[2] = 666;
+
+
+print "\ninit_values[" + length(init_values) + "]: ";
+print init_values;
+print "\n";
+
+print "\ninit_values2[" + length(init_values2) + "]: ";
+print init_values2;
+print "\n";
+
+print "\ninit_values_copy[" + length(init_values_copy) + "]: ";
+print init_values_copy;
+print "\n";
+
+*/
+
+var a = {1,2,{6,7}};
+
+var c = copy(a);

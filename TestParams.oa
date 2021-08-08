@@ -1,0 +1,9 @@
+
+
+RF_RAM Fifo
+{
+	in word In;
+
+	wr_mode = active_high;
+	wr_width = 1;
+}

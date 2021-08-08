@@ -1,0 +1,13 @@
+oasm2verilog
+*.exe
+*.o
+*.stackdump
+*.bak
+lex.yy.c
+*.tab.c
+*.tab.h
+*.output
+*.v
+lex.c
+gmon.out
+gmon.txt

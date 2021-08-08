@@ -1,0 +1,28 @@
+
+
+ALU Constants
+{
+	word reg a1 = 5;
+//	const word a4 = 0xFFFF;
+	const word a5 = 0x0001;
+	const word a6 = 0x0000;
+	const word a7 = 6;
+
+	const word a8 = 5;
+
+	inst
+	{
+		add1:
+		a1 = add(a1, 1);
+
+		addM1:
+		a1 = add(a1, 5);
+
+		addZero:
+		a1 = add(a1, 0);
+
+		addNine:
+		a1 = add(a1, 9);
+	}
+}
+

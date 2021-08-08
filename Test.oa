@@ -1,0 +1,131 @@
+
+var Bool = !false && false;
+print Bool + "\n";
+
+Bool = !Bool;
+print Bool + "\n";
+
+print 2 * 5 + "\n";
+
+var RollOver = (-1 << 31) - 1;
+//var Msg = (RollOver < 0) ? "negative" : "positive";
+var Msg = "positive";
+print "two\n";
+print Msg + "\n";
+
+print "hey\n";
+
+print "Divide: " + (5 / 0) + "\n";
+print "Hex: " + 0xFFFFFFFF + "\n";
+print "XOR: " + (0x55 ^ 0xAA) + "\n";
+
+print "sqrt(255): " + sqrt(255) + "\n";
+print "sqrt(256): " + sqrt(256) + "\n";
+print "sqrt(257): " + sqrt(257) + "\n";
+
+print "log2(31): "  + log2(31) + "\n";
+print "log2(32): "  + log2(32) + "\n";
+print "log2(33): "  + log2(33) + "\n";
+
+print "pow(3,2): "  + pow(3,2) + "\n";
+print "pow(4,3): "  + pow(4,3) + "\n";
+
+var x = 55;
+print "exp2(log2(" + x + ")) = " + exp2(log2(x)) + "\n";
+
+print "log2(\"abc\") = " + log2("abc") + "\n";
+
+
+print "\n";
+var list = {1, 2, 3};
+print "\nlist: ";
+print list;
+print "\n";
+
+var list_of_lists = {11, 22, 33, {5, 6, 7}, list};
+print "\nlist of lists: ";
+print list_of_lists;
+print "\n";
+
+print "\nlist_of_lists[3]: ";
+print list_of_lists[3];
+print "\n";
+
+list_of_lists[3] = 66;
+print "\nlist_of_lists[3]: ";
+print list_of_lists[3];
+print "\n";
+
+
+var CounterTotal = 10;
+CounterTotal = CounterTotal + 5;
+
+ALU Counter
+{
+	output reg bit Pulse;
+	reg word Count;
+	input bit Reset;
+
+	const word Limit = CounterTotal-1;
+
+	warm_reset <- delay(Reset,1);
+
+	init
+	{
+		Pulse = 0;
+		Count = 0;
+
+		//warm_reset_affects = Pulse, Count;
+	}
+
+	tfa
+	{
+		branch LimitReached = !status;
+	}
+
+	inst
+	{
+		Zero:
+		Count = zero();
+		Pulse = 0;
+
+		Compare:
+		xor(Count, Limit);
+
+		:
+		if (LimitReached) DoPulse;
+
+		:
+		Count = inc(Count);
+		goto Compare;
+
+		DoPulse:
+		Pulse = 1;
+		goto Zero;
+	}
+}
+
+var long_string  = "dflkjfdlkjsdlsdkjfd  asdflkjlkj dsflkjdsflkj fdslkjfdslkj lkjdsfl kjdsflkj fdslkj fdslkj lkj fdsa\n";
+var long_string2 = "asflkj lkflkj fdslkj fdslkj fdslkj lksj lkj lkjsdfalkj sfdlakj lkjsfdlkjfds lkj fsdalkj lfdskj sfdakj\n";
+var long_string3 = "asflkj lkflkj fdslkj fdslkj fdslkj lksj lkj lkjsdfalkj sfdlakj lkjsfdlkjfds lkj fsdalkj lfdskj sfdakj\n";
+var long_string4 = "asflkj lkflkj fdslkj fdslkj fdslkj lksj lkj lkjsdfalkj sfdlakj lkjsfdlkjfds lkj fsdalkj lfdskj sfdakj\n";
+var long_string5 = "asflkj lkflkj fdslkj fdslkj fdslkj lksj lkj lkjsdfalkj sfdlakj lkjsfdlkjfds lkj fsdalkj lfdskj sfdakj\n";
+var long_string6 = "asflkj lkflkj fdslkj fdslkj fdslkj lksj lkj lkjsdfalkj sfdlakj lkjsfdlkjfds lkj fsdalkj lfdskj sfdakj\n";
+var long_string7 = "asflkj lkflkj fdslkj fdslkj fdslkj lksj lkj lkjsdfalkj sfdlakj lkjsfdlkjfds lkj fsdalkj lfdskj sfdakj\n";
+var long_string8 = "asflkj lkflkj fdslkj fdslkj fdslkj lksj lkj lkjsdfalkj sfdlakj lkjsfdlkjfds lkj fsdalkj lfdskj sfdakj\n";
+
+print "starting\n";
+
+var really_long_string_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier = "saflkjlkj fsdlkjsdlkj dslkj dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf  dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf dslkj fdslkj f;dsalkj ;lkj fdsal;kj fds;lkj dsf;lkj sl;ksjf \n";
+
+print "declared\n";
+
+print really_long_string_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier_with_really_long_identifier;
+print long_string + long_string2 + long_string + long_string2;
+/*
+var One = 1;
+var Two = 2;
+var tst = (One + Two + One + Two) * Two * Two * One / Two / Two + 5 - One;
+print tst;
+print "\n";
+*/

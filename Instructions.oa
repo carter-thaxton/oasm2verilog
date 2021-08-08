@@ -1,0 +1,20 @@
+
+ALU TestInstructions
+{
+	input word a;
+	reg bit b;
+	reg word w;
+
+	inst
+	{
+		:
+		w = inc(w);
+
+		:
+		w = shli(w,5);
+		latch(b);
+
+		:
+		w = mov(a);
+	}
+}

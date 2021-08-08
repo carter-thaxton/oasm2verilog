@@ -1,0 +1,70 @@
+
+
+module Outer
+{
+	module Inner
+	{
+		module Test
+		{
+			input bit a <- i.b;
+	//		wire word q -> i.w;
+
+			input bit t;
+			output bit b;
+		}
+
+		Test test1;
+		Test test2;
+
+		module EvenInner
+		{
+			Test test3;
+		}
+	}
+
+	module TakesInput
+	{
+		input word w;
+		output bit b;
+	}
+
+	TakesInput i;
+
+	wire bit d;
+	wire bit e;
+	wire bit f;
+
+	d <- e;
+	d <- f;
+
+
+/*
+	RF_RAM TestRAM
+	{
+		// Declare inputs and outputs around an RF object
+		// Note the fanout of WrData to both write words
+		input bit Wr -> wr;
+		input word WrData -> wr_data0_word, wr_data1_word;
+
+		input bit Rd -> rd;
+		output word RdData <- rd_data0_word;
+
+		input bit Reset -> delay(2) -> flush;
+
+		// Set parameters
+		wr_width = 1;
+		wr_mode = active_high;
+
+		rd_width = 1;
+		rd_mode = active_high;
+
+		// Initial value uses array data type.
+		// Arrays can be made up of arbitrary expressions in OASM.
+		init_data = {0, 1, 2, 3, 4};
+	}
+
+	TestRAM t1;
+	TestRAM t2;
+*/
+}
+

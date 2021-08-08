@@ -1,0 +1,19 @@
+
+
+extern module TestExtern
+{
+	input  word in;
+	output word out;
+}
+
+FPOA Top
+{
+	core_clk_freq = 800;
+
+	TestExtern e1;
+	TestExtern e2;
+
+	e1.out -> e2.in;
+	e1.in  <- e2.out;
+}
+

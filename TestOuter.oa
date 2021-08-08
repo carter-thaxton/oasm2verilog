@@ -1,0 +1,53 @@
+
+
+module Outer
+{
+	wire word b;
+
+	ALU Hey
+	{
+		input bit x;
+		b.v -> warm_reset;
+	}
+	Hey Hey;
+
+	module Mid
+	{
+		Hey hey;
+		wire bit q;
+
+		wire bit sss <- delay(1) <- b.v;
+		q -> hey.x;
+	}
+	Mid Mid;
+}
+
+
+/*
+module Outer
+{
+	wire bit b;
+
+	Outer$Hey Hey;
+	Outer$Mid Mid;
+
+	b -> Hey.Outer$b;
+////	b -> Mid.Outer$b;
+}
+
+module Outer$Mid
+{
+////	input bit Outer$b;
+
+//	Hey hey;
+
+////	Outer$b -> hey.Outer$b;
+}
+
+RF_RAM Outer$Hey
+{
+	input bit Outer$b;
+
+	Outer$b -> rd;
+}
+*/

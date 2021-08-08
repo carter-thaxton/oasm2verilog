@@ -1,0 +1,48 @@
+
+
+ALU OneInst
+{
+	input word In;
+	output word reg Out = 5;
+
+	inst
+	{
+		Out = inc(In);
+	}
+}
+
+ALU TestBranches
+{
+	input bit in0, in1;
+
+	tfa
+	{
+		branch cond0 = in0 ^ in1;
+		branch cond1 = in1;
+	}
+
+	inst
+	{
+		i0:
+		goto i2;
+
+		i1:
+		if (cond0) i3;
+
+		i2:
+		if (cond0) i6;
+
+		i3:
+		if (cond0) i2 else i5;
+
+		i4:
+		case (cond0,cond1) i0,i1,i2,i3;
+
+		i5:
+		case (cond1,cond0) i0,i1,i2,i3;
+
+		i6:
+	}
+}
+
+ALU Empty {}

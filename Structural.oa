@@ -1,0 +1,399 @@
+
+// Bar.oah
+namespace Bar
+{
+	module Impl;
+	module Impl2;
+}
+
+
+using Bar;
+
+namespace Foo
+{
+
+module Outer
+{
+	in bit Reset;
+
+	Impl B;
+
+	module Impl
+	{
+		in bit Reset <- x.Reset;
+
+		IN BIT ID ';'
+		id ID ';'
+
+		id RARROW ID ';'
+
+		id : ID
+		   | id '.' ID
+
+
+		Hey x;
+
+		Outer.Impl x;
+
+		Reset -> Counter.Reset, Counter2.Reset;
+
+		fred.sig -> abc;
+
+		module Impl
+		{
+		}
+
+		ALU Counter
+		{
+			in bit Reset;
+			out reg bit Pulse;
+			reg word Count;
+
+			const word Limit = CounterTotal-1;
+
+			Reset -> warm_reset;
+
+			init
+			{
+				Pulse = 0;
+				Count = 0;
+				warm_reset_affects(Pulse, Count);
+			}
+
+			tfa
+			{
+				branch LimitReached = !status;
+			}
+
+			inst
+			{
+				Start:
+				Count, Pulse = 0;		// same as Count = zero();  Pulse = 0;
+
+				Compare:
+				xor(Count, Limit);
+
+				:
+				if (LimitReached) DoPulse;
+
+				:
+				Count = inc(Count);
+				goto Compare;
+
+				DoPulse:
+				Pulse = 1;
+				goto Start;
+			}
+		}
+	}
+}
+
+// Outer$Inner$Counter
+
+// source
+module A
+{
+	wire bit Y <- 5;
+
+	B.Y -> C.X;
+
+	ALU B
+	{
+		out bit Y;
+	}
+
+	ALU C
+	{
+		in bit X;
+	}
+
+	D d1;
+	D d2;
+
+	d1.f <- Y;
+	d2.f <- B.Y;
+}
+
+module D
+{
+	in bit f;
+}
+
+
+// flattened
+module A
+{
+	wire bit Y <- 5;
+	wire bit B$Y;
+
+	A$B B;
+	B.Y -> B$Y;
+
+	A$C C;
+	C.X <- B$Y;
+
+	D d1;
+	D d2;
+	d1.f <- Y;
+	d2.f <- B$Y;
+}
+
+ALU A$B
+{
+	out bit Y;
+}
+
+ALU A$C
+{
+	in bit X;
+}
+
+module D
+{
+	in bit f;
+}
+
+
+
+// MPEG2Encoder/ChromaInterpolator/Control.oa
+namespace MathStar.MPEG2Encoder.ChromaInterpolator
+{
+	module Control
+	{
+	}
+}
+
+// MPEG2Encoder/ChromaInterpolator/ChromaInterpolator.oa
+namespace MathStar.MPEG2Encoder.ChromaInterpolator
+{
+	module ChromaInterpolator
+	{
+		Control control;
+		//
+	}
+}
+
+
+
+// MPEG2Encoder/ChromaInterpolator/ChromaInterpolator.v
+module MathStar$MPEG2Encoder$ChromaInterpolator$Control (
+);
+//
+endmodule
+
+module MathStar$MPEG2Encoder$ChromaInterpolator$ChromaInterpolator (
+);
+
+	MathStar$MPEG2Encoder$ChromaInterpolator$Control control (
+		.sfdlkjdfs()
+	);
+endmodule
+
+
+
+// MPEG2Encoder/MPEG2Encoder.oa
+using MathStar.Libraries.Math;
+using MathStar.MPEG2Encoder.ChromaInterpolator;
+
+
+extern module Libs.Hey
+{
+	in bit A;
+	out word B;
+}
+
+namespace MathStar.MPEG2Encoder
+{
+	using ChromaInterpolator;
+	using XRAMController;
+
+	// Instantiations
+	ChromaInterpolator interp;
+	XRAMController ctrl;
+
+	// From interpolator to controller
+	interp.OutputEn		-> ctrl.WriteEn;
+	interp.OutputData	-> ctrl.WriteData;
+}
+
+namespace SomethingElse
+{
+	using ChromaInterpolator;
+	using XRAMController;
+}
+
+
+
+	wire        interp$OutputEn;
+	wire [16:0] interp$OutputData;
+	ChromaInterpolator interp (
+		.OutputEn(interp$OutputEn),
+		.OutputData(interp$OutputData)
+	);
+	XRAMController ctrl (
+		.WriteEn(interp$OutputEn),
+		.WriteData(interp$OutputData),
+	);
+
+
+
+// ALib
+
+// hot comment
+//
+// extern module A
+// {
+//    in bit x;
+// }
+//
+// extern referenced module B
+// {
+//    in bit y;
+// }
+
+module A(
+	input x
+);
+
+	B b(
+		.y(x)
+	);
+
+// blkjalkj
+endmodule
+
+
+
+
+module Inst1
+{
+	in bit x;
+}
+
+module Inst2
+{
+	out bit y;
+}
+
+
+module A
+{
+	Inst1 i1;
+	Inst2 i2;
+
+	delay(i2.y,a) -> i1.x;
+
+	wire bit mywire;
+	i2.y1 -> mywire -> i1.x1;
+
+	i2.y1 -> mywire;
+	mywire -> i1.x1;
+
+
+	i2.y1 -> delay(2) -> wire bit y1_delayed -> i1.x1;
+
+	i2.y1 -> x.in1 -> delay(1) -> x.in2 -> delay(2) -> x.in3, x.in4;
+
+
+	wire i2$in2$2;
+	i2.y1 -> x.in1;
+	x.in1 -> delay(1) -> x.in2;
+	x.in2 -> delay(2) -> wire bit x$in2$2 -> x.in3;
+	x.in2 -> delay(2) -> x$in2$2 -> x.in4;
+
+
+	//
+	wire i2$y1;
+	wire i2$y1$1;
+	i2.y1 -> i2$y1;
+	delay(i2$y1,1) -> i2$y1$1;
+	i2$y1$1 -> i1.x1;
+	//
+
+	i2.y1	-> delay(1) ->	i1.x1;
+
+
+	// Hook up controller to FIFO
+	FifoCtrl Ctrl;
+	FifoRF Fifo;
+
+	Ctrl.Wr		-> delay(1) ->	Fifo.Wr;
+	Ctrl.WrData	-> delay(1) ->	Fifo.WrData;
+
+	Ctrl.Rd		-> delay(2) ->	Fifo.Rd;
+	Ctrl.RdData	<- delay(1) <-	Fifo.RdData;
+}
+
+
+
+module B
+{
+	wire bit a;
+	wire bit c;
+
+	B b;
+
+	B.a <- c;
+
+	module C
+	{
+		in bit a;
+		in bit q <- B.a;	// B is a module in scope, known at parse-time
+
+		wire bit d <- a.b;	// a is an instance, not known at parse-time, but known at semantic analysis  (b is not known until structural analysis)
+
+		A a;
+
+		wire bit e <- a.b;	// e is an instance, known at parse-time  (b is not known until structural analysis)
+	}
+	// B$C C;
+
+	C.a <- c;
+}
+
+
+module B$B
+{
+	in bit a;
+}
+
+
+module B
+{
+}
+
+
+
+// In ALUs, connect all words that are the source of an instruction, and which are not regs to wordN_ins.
+// Again go through the list of input words, and for each word that isn't assigned a wordN_in and is not the
+// source of a connection (to a delay, for instance), connect it to a wordN_in, and issue a warning about unused input.
+
+
+// Expressions may only refer to locally declared signals, with declare-before-use semantics.
+// Locally declared signals must be structurally local in addition to syntactically local in scope.
+// Data types are always known for signals referred to by expressions at parse-time.
+// ALUs may only use locally declared signals, because expressions are used to program the ALU with instructions or TFs.
+
+// The signal in a "delay(signal, int)" expression may not have structural syntax like "a.b"
+// However, it may use "delay(a.v, 2)"
+// The alternative is quite bizarre: "delay(a, 2).v"
+// This should auto-commute, because the hardware does not support the notion of delaying a bit-slice, so it is actually
+// more correct to say: "delay(a, 2).v"
+
+// Signal source expressions and signal destination expressions are separate notions from expressions.
+// These also support "a -> delay(1) -> b".  For consistency, the syntax: "delay(a, 1) -> b" should be allowed, but
+// this may not be the same rule as that for expressions, because the latter allows "delay(a.b, 1) -> b"
+
+
+ALU A
+{
+	output bit reg a;
+	input word b;
+	input bit c;
+	word reg d;
+
+	TF
+	{
+		a = d[2] | delay(c,1) | b.v & ~delay(d,1).v;
+	}
+}

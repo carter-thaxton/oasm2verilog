@@ -1,0 +1,55 @@
+
+module Mid
+{
+	// Instantiate modules and objects
+	Submodule1 s1;
+	Submodule2 s2;
+
+	// Wire them up, without declaring wires at Mid scope
+	s1.A -> s2.C;
+	s1.B <- s2.D;
+
+	// Go through a delay
+	s1.A -> delay(1) -> s3.F;
+
+	// Either direction works, going through a named wire, and to multiple destinations
+	s3.G, s3.H <- delay(1) <- tmp <- s2.E;
+
+	// Instances and signals do not need to be declared before use for structural connections
+	// Signals do need to be declared before use in expressions (ALU instructions, TF expressions, ...)
+	wire word tmp;
+	Submodule3 s3;
+}
+
+module Submodule1
+{
+	output word A;
+	input bit B;
+
+	output word Q;
+
+	// Declares an inner module with inner scope.  This will have the module name Submodule1$Inner
+	// Automatically instantiates an Inner module with the same instance name, in this case Inner.
+	module Inner
+	{
+		// Inputs and outputs can be connected at declaration.
+		// This drives Submodule1.Inner.P with Submodule1.A and Submodule1.Q with Submodule1.Inner.Q
+		input word P <- A;
+		output word Q -> Q;
+	}
+}
+
+module Submodule2
+{
+	input word C;
+	output bit D;
+	output word E;
+}
+
+module Submodule3
+{
+	input word F;
+	input word G;
+	input word H;
+}
+
