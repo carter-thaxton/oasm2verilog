@@ -1,6 +1,7 @@
 
 # Tools
 CC	= g++
+CXX = g++
 CXXFLAGS = $(NO_CYGWIN) -Wall -g $(PROFILE) $(DEFINES)
 CFLAGS	= $(NO_CYGWIN) -g $(PROFILE)
 LEX	= flex
@@ -28,7 +29,7 @@ LIB	= -lm
 
 # Rules
 $(TARGET):	$(OBJ)
-	$(CC) $(CXXFLAGS) -o $(TARGET) $(LIB) $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(LIB) $(OBJ)
 
 %.c:	%.y
 %.tab.c %.tab.h:	%.y
@@ -48,5 +49,5 @@ clean:
 # Tests
 TF_OBJ	= testTruthFunction.o testCommon.o StringBuffer.o Symbol.o TruthFunction.o Signal.o Expression.o
 testTruthFunction:	$(TF_OBJ)
-	$(CC) $(CXXFLAGS) -o testTruthFunction $(LIB) $(TF_OBJ)
+	$(CXX) $(CXXFLAGS) -o testTruthFunction $(LIB) $(TF_OBJ)
 
