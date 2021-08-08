@@ -24,13 +24,13 @@ void Signal::Print(FILE *f) const
 	const char *anonymous_str = Anonymous ? "anonymous " : "";
 	const char *automatic_str = Automatic ? "automatic " : "";
 
-	char *dir_str = "";
+	const char *dir_str = "";
 	if (Direction == DIR_IN)
 		dir_str = "input ";
 	else if (Direction == DIR_OUT)
 		dir_str = "output ";
 
-	char *behavior_str = "";
+	const char *behavior_str = "";
 	if (Behavior == BEHAVIOR_WIRE)
 		behavior_str = "wire";
 	else if (Behavior == BEHAVIOR_REG)
@@ -48,7 +48,7 @@ void Signal::Print(FILE *f) const
 	else if (Behavior == BEHAVIOR_BIT_SLICE)
 		behavior_str = "bit_slice";
 
-	char *data_type_str = "";
+	const char *data_type_str = "";
 	if (DataType == DATA_TYPE_BIT)
 		data_type_str = "bit";
 	else if (DataType == DATA_TYPE_WORD)
