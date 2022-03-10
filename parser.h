@@ -153,7 +153,7 @@ extern void yyerror(char const *errstr);
 extern void yyerrorf(char const *errstr, ...);
 
 /* Hook to parse.y */
-#include "parse.tab.h"
+#include "parse.tab.hpp"
 
 
 #endif

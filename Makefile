@@ -1,9 +1,7 @@
 
 # Tools
-CC	= g++
 CXX = g++
 CXXFLAGS = $(NO_CYGWIN) -Wall -g $(PROFILE) $(DEFINES)
-CFLAGS	= $(NO_CYGWIN) -g $(PROFILE)
 LEX	= flex
 LFLAGS	=
 YACC	= bison
@@ -31,19 +29,21 @@ LIB	= -lm
 $(TARGET):	$(OBJ)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(LIB) $(OBJ)
 
-%.c:	%.y
-%.tab.c %.tab.h:	%.y
-	$(YACC) $(YFLAGS) $<
+parse.tab.cpp:	parse.y
+	$(YACC) $(YFLAGS) -o $@ $<
 
-.SECONDARY: lex.c parse.tab.c
+lex.cpp:	lex.l
+	$(LEX) $(LFLAGS) -t $< > $@
+
+.SECONDARY: lex.cpp parse.tab.cpp
 
 
 # Dependencies
-parser.o:		parse.tab.h parser.h
+parser.o:		parse.tab.cpp parser.h
 
 # Cleanup
 clean:
-	rm -f $(TARGET) $(TARGET).exe *.exe $(OBJ) *.o *.stackdump *.bak lex.yy.c *.tab.c *.tab.h *.output *.v lex.c gmon.out gmon.txt
+	rm -f $(TARGET) $(TARGET).exe *.exe $(OBJ) *.o *.stackdump *.bak lex.yy.c *.tab.cpp *.tab.hpp *.output *.v lex.c gmon.out gmon.txt
 
 
 # Tests

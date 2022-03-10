@@ -4,10 +4,10 @@ oasm2verilog
 *.stackdump
 *.bak
 lex.yy.c
-*.tab.c
-*.tab.h
+*.tab.cpp
+*.tab.hpp
 *.output
 *.v
-lex.c
+lex.cpp
 gmon.out
 gmon.txt
