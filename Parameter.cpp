@@ -2,6 +2,8 @@
 #include "Parameter.h"
 #include "Common.h"
 
+#include <ctype.h>
+
 //
 // Parameter definition containing metadata across all instances of the parameter
 //
